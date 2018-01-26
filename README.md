@@ -13,7 +13,7 @@ Or you can just install Docker with this command `curl -sSL https://get.docker.c
 Dont forget to enable SPI. This can be achieved by adding `dtparam=spi=on` to the `config.txt` if your using the Hypriot Image or via `sudo raspi-config` and then enable SPI interface: `Interfacing Options > P4 SPI > Yes` if your using a standard [Raspbian Image](https://www.raspberrypi.org/downloads/raspbian/).
 
 #### Install container
-To install this container run the following command, after you are logged in via ssh into your Raspberry Pi:
+To install this container run the following command, after you are logged in into your Raspberry Pi via ssh:
 ```
 cd fhem-docker
 source install.sh
