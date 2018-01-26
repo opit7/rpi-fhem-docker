@@ -15,6 +15,7 @@ Dont forget to enable SPI. This can be achieved by adding `dtparam=spi=on` to th
 #### Install container
 To install this container run the following command, after you are logged in into your Raspberry Pi via ssh:
 ```
+git clone https://github.com/opit7/fhem-docker.git
 cd rpi-fhem-docker
 source install.sh
 ```
