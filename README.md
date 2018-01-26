@@ -1,4 +1,4 @@
-# rpi-fhem-docker
+# fhem-docker
 This is Docker project for the Raspberry Pi3(arm64) including the following containers:
  - fhem
  - mqtt
