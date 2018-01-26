@@ -1,0 +1,12 @@
+_Store
+.idea
+!.gitkeep
+/fhem/core/FHEM/FhemUtils/uniqueID
+/fhem/core/backup/*
+/fhem/core/cache/*
+/fhem/core/log/*
+!/fhem/core/log/.gitkeep
+/fhem/core/restoreDir/*
+/mysql/data/*
+/mqtt/log/*
+/mqtt/data/*

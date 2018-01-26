@@ -1,0 +1,21 @@
+{
+"alexa": {
+     "name": "Alexa",
+     "keyFile": "./key.pem",
+     "certFile": "./cert.pem",
+     "nat-pmp": "",
+     "nat-upnp": false,
+     "applicationId": "amzn1.ask.skill.xxxxxxx",
+     "oauthClientID": "amzn1.application-oa2-client.xxxxxxx"
+ },
+
+ "connections": [
+     {
+         "name": "FHEM",
+         "server": "fhem",
+         "port": "8083",
+	     "webname": "fhem",
+         "filter": "room=alexa"
+     }
+ ]
+}

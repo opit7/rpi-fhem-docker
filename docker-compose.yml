@@ -1,0 +1,84 @@
+version: '2'
+
+services:
+    fhem:
+        restart: always
+        expose:
+            - "8083"
+            - "7072"
+        ports:
+            - "8083:8083"
+            - "7072:7072"
+        build: fhem
+        privileged: true
+        volumes:
+            - ./fhem/core/:/opt/fhem/
+        networks:
+            - fhem-network
+        depends_on:
+            - "mysql"
+            - "mqtt"
+
+    fhemExtended:
+        restart: always
+        build: fhemExtended
+        image: tif:fhemExtended
+        privileged: true
+        volumes:
+            - ./fhemExtended/core/:/opt/fhemExtended/
+        networks:
+            - fhem-network
+        depends_on:
+            - "fhem"
+
+    mysql:
+        restart: always
+        expose:
+            - "3306"
+            - "33060"
+        ports:
+            - "3306:3306"
+            - "33060:33060"
+        image: hypriot/rpi-mysql
+        volumes:
+            - ./mysql/init.sql:/docker-entrypoint-initdb.d/fhem-init.sql
+            - ./mysql/data:/var/lib/mysql
+        environment:
+            - MYSQL_ROOT_PASSWORD=KQW8JgZEDb4CpSMaz
+            - MYSQL_DATABASE=fhem
+        networks:
+            - fhem-network
+
+    mqtt:
+        restart: always
+        expose:
+            - "1883"
+            - "9001"
+        ports:
+            - "1883:1883"
+            - "9001:9001"
+        image: pascaldevink/rpi-mosquitto
+        networks:
+            - fhem-network
+        volumes:
+            - ./mqtt/config/:/mqtt/config/
+            - ./mqtt/log/:/mqtt/log/
+            - ./mqtt/data/:/mqtt/data/
+
+    alexa:
+        restart: always
+        expose:
+            - "3000"
+        ports:
+            - "3000:3000"
+        image: sbiermann/rpi-alexa-fhem
+        volumes:
+            - ./alexa/config:/config/
+        networks:
+            - fhem-network
+        depends_on:
+            - "fhem"
+
+networks:
+    fhem-network:
+        driver: bridge
